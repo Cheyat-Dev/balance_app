@@ -140,9 +140,13 @@ Column userCard(DocumentSnapshot doc){
                     onPressed: () {
                       
                       if(doc['balance'] > 0){
-                        doc.reference.update({
-                        'balance' : doc['balance'] - 1000
-                      });}
+                        FirebaseFirestore.instance.runTransaction((transaction) async {
+                        DocumentSnapshot snap = await transaction.get(doc.reference);
+                        await transaction.update(snap.reference, {
+                          'balance' : snap['balance'] - 1000
+                        });
+                      });
+                      }
                     },
                 ),
               ),
@@ -157,8 +161,11 @@ Column userCard(DocumentSnapshot doc){
                     ),
                     label: Text(''),
                     onPressed: () {
-                      doc.reference.update({
-                        'balance' : doc['balance'] + 1000
+                      FirebaseFirestore.instance.runTransaction((transaction) async {
+                        DocumentSnapshot snap = await transaction.get(doc.reference);
+                        await transaction.update(snap.reference, {
+                          'balance' : snap['balance'] + 1000
+                        });
                       });
                     },
                 ),
