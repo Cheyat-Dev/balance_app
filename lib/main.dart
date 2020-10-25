@@ -5,11 +5,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 //TODO Make the  Number editable directly
 
 
-void main() {
-
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp();
-
+  await Firebase.initializeApp();
   runApp(MaterialApp(
     home: Home(),
   ));
@@ -140,9 +138,11 @@ Column userCard(DocumentSnapshot doc){
                     ),
                     label: Text(''),
                     onPressed: () {
-                      doc.reference.update({
+                      
+                      if(doc['balance'] > 0){
+                        doc.reference.update({
                         'balance' : doc['balance'] - 1000
-                      });
+                      });}
                     },
                 ),
               ),
