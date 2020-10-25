@@ -1,23 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-//TODO Initialize Firebase
-//TODO Convert the mock data into firebase data
 //TODO Make the  Number editable directly
-
-//Mock Class
-//TODO Replace the mock class
-class User{
-  String name;
-  int balance;
-
-  User({this.name  , this.balance = 0});
-}
-//Mock Class
 
 
 void main() {
 
-  
+  WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp();
 
   runApp(MaterialApp(
     home: Home(),
@@ -30,25 +21,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
-  //Mock List
-  //TODO Replace the Mock List
-  List<User> users = [
-    User(name: 'David'),
-    User(name: 'Dan'),
-    User(name: 'Amy'),
-    User(name: 'Jane'),
-  ];
-  //Mock List
-
-  //Mock SetState Function
-  int changeBalance(int balance , User user){
-    setState(() {
-      user.balance += balance;
-    });
-    return 0;
-  }
-  //Mock SetState Function
 
   @override
   Widget build(BuildContext context) {
@@ -119,11 +91,16 @@ class _HomeState extends State<Home> {
             SizedBox(height: 40,),
             
             Expanded(
-              child: ListView.builder(
-                itemCount: users.length,
-                itemBuilder: (context, index) {
-                  return userCard(users[index] , changeBalance);
-                },
+              child: StreamBuilder(
+                stream: FirebaseFirestore.instance.collection('userNames').snapshots(),
+                builder: (context, snapshot) {
+                  return ListView.builder(
+                    itemCount: snapshot.data.documents.length,
+                    itemBuilder: (context, index) {
+                      return userCard(snapshot.data.docs[index]);
+                    },
+                  );
+                }
               ),
             ),
           ],
@@ -133,7 +110,7 @@ class _HomeState extends State<Home> {
   }
 }
 
-Column userCard(User currentUser , Function changeBalance){
+Column userCard(DocumentSnapshot doc){
   return Column(
     children: <Widget>[
       Card(
@@ -144,7 +121,7 @@ Column userCard(User currentUser , Function changeBalance){
               Expanded(
                 flex : 5,
                 child: Text(
-                  currentUser.name,
+                  doc['name'],
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 20,
@@ -163,7 +140,9 @@ Column userCard(User currentUser , Function changeBalance){
                     ),
                     label: Text(''),
                     onPressed: () {
-                      if(currentUser.balance > 0) changeBalance(-1000 , currentUser);
+                      doc.reference.update({
+                        'balance' : doc['balance'] - 1000
+                      });
                     },
                 ),
               ),
@@ -178,7 +157,9 @@ Column userCard(User currentUser , Function changeBalance){
                     ),
                     label: Text(''),
                     onPressed: () {
-                      changeBalance(1000 , currentUser);
+                      doc.reference.update({
+                        'balance' : doc['balance'] + 1000
+                      });
                     },
                 ),
               ),
@@ -187,7 +168,7 @@ Column userCard(User currentUser , Function changeBalance){
                 flex : 7,
                 child: Center(
                   child: Text(
-                    '${currentUser.balance.toString()}\$',
+                    '${doc['balance']}\$',
                     style: TextStyle(
                       fontSize: 20,
                       color: Colors.white,
