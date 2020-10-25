@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "554989946568",
+    "firebase_url": "https://balance-app-3dca7.firebaseio.com",
+    "project_id": "balance-app-3dca7",
+    "storage_bucket": "balance-app-3dca7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:554989946568:android:8cae69954ea024a65c07fd",
+        "android_client_info": {
+          "package_name": "com.cheyat.balance_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "554989946568-ksf66nmctj9dfdejiehd2f78jt4oeap5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADQWn3k14juyosjvWkmksGfKAC0Dp7yZw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "554989946568-ksf66nmctj9dfdejiehd2f78jt4oeap5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
