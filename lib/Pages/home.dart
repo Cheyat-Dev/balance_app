@@ -50,19 +50,7 @@ class _HomeState extends State<Home> {
               ),
 
               Expanded(
-                child: StreamBuilder(
-                    stream: FirebaseFirestore.instance
-                        .collection('userNames')
-                        .snapshots(),
-                    builder: (context, snapshot) {
-                      if (!snapshot.hasData) return Text('Loading');
-                      return ListView.builder(
-                        itemCount: snapshot.data.documents.length,
-                        itemBuilder: (context, index) {
-                          return userCard(snapshot.data.docs[index]);
-                        },
-                      );
-                    }),
+                child: UserCards(),
               ),
             ],
           ),
