@@ -44,26 +44,6 @@ class _HomeState extends State<Home> {
               height: 40,
             ),
 
-            //Down below is just for the text for user's balance
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 30),
-              child: Container(
-                color: Colors.purple[700],
-                height: 100,
-                child: Center(
-                    child: Text(
-                  'Users\' Balance',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 2,
-                  ),
-                )),
-              ),
-            ),
-            //Up Above is just for the text for user's balance
-
             SizedBox(
               height: 40,
             ),
@@ -295,8 +275,6 @@ class _AddUserFormState extends State<AddUserForm> {
                   String errMsg = "Please enter a valid number";
                   if (value == null) return errMsg;
                   if (int.tryParse(value) == null) {
-                    //print(value);
-                    //print(int.tryParse(value));
                     return errMsg;
                   }
                   return null;
