@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:vote_app/Functions/user_form_functions.dart';
 
 Column userCard(DocumentSnapshot doc) {
   return Column(
@@ -18,45 +19,14 @@ Column userCard(DocumentSnapshot doc) {
                 ),
               ),
               Expanded(
-                flex: 4,
-                child: FlatButton.icon(
-                  shape: CircleBorder(),
-                  icon: Icon(
-                    Icons.remove,
+                flex: 3,
+                child: RawMaterialButton(
+                  onPressed: () async {},
+                  child: Icon(
+                    Icons.settings,
                     color: Colors.white,
                   ),
-                  label: Text(''),
-                  onPressed: () {
-                    if (doc['balance'] > 0) {
-                      FirebaseFirestore.instance
-                          .runTransaction((transaction) async {
-                        DocumentSnapshot snap =
-                            await transaction.get(doc.reference);
-                        transaction.update(snap.reference,
-                            {'balance': snap['balance'] - 1000});
-                      });
-                    }
-                  },
-                ),
-              ),
-              Expanded(
-                flex: 4,
-                child: FlatButton.icon(
                   shape: CircleBorder(),
-                  icon: Icon(
-                    Icons.add,
-                    color: Colors.white,
-                  ),
-                  label: Text(''),
-                  onPressed: () {
-                    FirebaseFirestore.instance
-                        .runTransaction((transaction) async {
-                      DocumentSnapshot snap =
-                          await transaction.get(doc.reference);
-                      transaction.update(
-                          snap.reference, {'balance': snap['balance'] + 1000});
-                    });
-                  },
                 ),
               ),
               Expanded(
