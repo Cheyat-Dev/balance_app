@@ -54,6 +54,7 @@ class _UserCardsState extends State<UserCards> {
                                     return SettingsForm(
                                       db: db,
                                       uid: doc.documentID,
+                                      userName: doc.data()['name'],
                                     );
                                   },
                                 );
@@ -69,7 +70,7 @@ class _UserCardsState extends State<UserCards> {
                             flex: 7,
                             child: Center(
                               child: Text(
-                                '${doc.data()['balance']}\$',
+                                'Rs. ${doc.data()['balance']}',
                                 style: TextStyle(
                                   fontSize: 20,
                                   color: Colors.white,

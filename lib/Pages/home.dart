@@ -21,10 +21,6 @@ class _HomeState extends State<Home> {
                 height: 40,
               ),
 
-              SizedBox(
-                height: 40,
-              ),
-
               //List below
               Padding(
                 padding: const EdgeInsets.all(0),

@@ -35,17 +35,46 @@ class _AddUserFormState extends State<AddUserForm> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Padding(
-              padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
-              child: Text(
-                'Add User',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 1.5,
-                  color: Colors.white,
+            //Topic and cross
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Stack(
+                  children: <Widget>[
+                    Container(
+                      height: 50,
+                      width: 350,
+                    ),
+                    Positioned(
+                      top: 10,
+                      left: 28,
+                      child: Text(
+                        'Add User ',
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 2,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      left: 280,
+                      child: RawMaterialButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: Icon(
+                          Icons.close,
+                          color: Colors.white,
+                          size: 30,
+                        ),
+                        shape: CircleBorder(),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
+              ],
             ),
             SizedBox(height: 35),
 
@@ -87,9 +116,10 @@ class _AddUserFormState extends State<AddUserForm> {
                   filled: true,
                 ),
                 validator: (value) {
+                  RegExp _numeric = RegExp(r'^-?[0-9]+$');
                   String errMsg = "Please enter a valid number";
-                  if (value == null) return errMsg;
-                  if (int.tryParse(value) == null) {
+                  if (value.isEmpty) return errMsg;
+                  if (!_numeric.hasMatch(value)) {
                     return errMsg;
                   }
                   return null;
@@ -99,8 +129,8 @@ class _AddUserFormState extends State<AddUserForm> {
             SizedBox(height: 35),
             FlatButton.icon(
               onPressed: () {
-                Navigator.pop(context);
                 if (formKey.currentState.validate()) {
+                  Navigator.pop(context);
                   CollectionReference users =
                       FirebaseFirestore.instance.collection('userNames');
                   addUser(users, _userName, _userBalance);
