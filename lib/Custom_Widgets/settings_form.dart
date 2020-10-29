@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:vote_app/Functions/user_form_functions.dart';
 
 class SettingsForm extends StatefulWidget {
-  FirebaseFirestore db = FirebaseFirestore.instance;
+  FirebaseFirestore db;
   String uid;
   String userName;
 

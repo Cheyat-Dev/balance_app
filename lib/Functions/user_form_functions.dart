@@ -10,3 +10,15 @@ Future<void> addUser(CollectionReference user, String name, int balance) {
 
 Future<void> deleteUser(FirebaseFirestore db, String uid) =>
     db.collection('userNames').doc(uid).delete();
+
+Future<bool> updateBalanceofUser(
+    FirebaseFirestore db, String uid, int balance) {
+  try {
+    db.collection('userNames').doc(uid).update({
+      'balance': balance,
+    });
+    return Future.value(true);
+  } catch (e) {
+    return Future.value(false);
+  }
+}
