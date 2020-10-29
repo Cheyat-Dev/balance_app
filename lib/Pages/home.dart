@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:vote_app/Custom_Widgets/User_form.dart';
 import 'package:vote_app/Custom_Widgets/user_card.dart';
@@ -25,11 +24,11 @@ class _HomeState extends State<Home> {
               Padding(
                 padding: const EdgeInsets.all(0),
                 child: Container(
-                  color: Colors.grey[700],
+                  color: Colors.deepPurple[700],
                   height: 70,
                   child: Center(
                       child: Text(
-                    'User\'s List',
+                    'Saphal Dairy Pasal',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 30,
@@ -53,6 +52,7 @@ class _HomeState extends State<Home> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.deepPurpleAccent,
         child: Icon(Icons.add),
         onPressed: () {
           showModalBottomSheet(
