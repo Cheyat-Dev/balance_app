@@ -28,7 +28,7 @@ class _HomeState extends State<Home> {
                   height: 70,
                   child: Center(
                       child: Text(
-                    'Saphal Dairy Pasal',
+                    'Your Organization\'s name',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 30,
