@@ -4,6 +4,9 @@ import 'package:vote_app/Custom_Widgets/edit_balance.dart';
 import 'package:vote_app/Custom_Widgets/settings_form.dart';
 
 class UserCards extends StatefulWidget {
+  int maxSliderValue;
+  UserCards({this.maxSliderValue});
+
   @override
   _UserCardsState createState() => _UserCardsState();
 }
@@ -90,6 +93,7 @@ class _UserCardsState extends State<UserCards> {
                                         db: db,
                                         uid: doc.documentID,
                                         balance: doc.data()['balance'],
+                                        maxSliderValue: widget.maxSliderValue,
                                       );
                                     },
                                   );

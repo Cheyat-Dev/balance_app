@@ -6,8 +6,9 @@ class EditBalanceForm extends StatefulWidget {
   FirebaseFirestore db;
   String uid;
   int balance;
+  int maxSliderValue;
 
-  EditBalanceForm({this.db, this.uid, this.balance});
+  EditBalanceForm({this.db, this.uid, this.balance, this.maxSliderValue});
 
   @override
   _EditBalanceFormState createState() => _EditBalanceFormState();
@@ -28,6 +29,8 @@ class _EditBalanceFormState extends State<EditBalanceForm> {
       hasBeenAlreadyImported = true;
       _balance = widget.balance;
     }
+
+    int sliderDivisions = widget.maxSliderValue ~/ 5;
 
     return Container(
       color: Colors.grey[850],
@@ -124,9 +127,9 @@ class _EditBalanceFormState extends State<EditBalanceForm> {
             //Slider
             Slider(
               min: 0,
-              max: 200,
+              max: widget.maxSliderValue.toDouble(),
               value: offsetValue,
-              divisions: 40,
+              divisions: sliderDivisions,
               onChanged: (val) {
                 setState(() {
                   offsetValue = val;
